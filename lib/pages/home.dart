@@ -1,17 +1,46 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:go_publish/data/session/user_sessions.dart';
+import 'package:go_publish/pages/auth/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
+  Home({super.key});
 
-  @override
-  State<StatefulWidget> createState()  => _HomeState();
-
-}
-
-class _HomeState extends State<Home> {
+  Future<Map<String, String>?> session = UserSessions.getSession();
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Home'),
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text('Home'),
+            // get saved user login email
+            FutureBuilder<Map<String, String>?>(
+              future: session,
+              builder: (BuildContext context, AsyncSnapshot<Map<String, String>?> snapshot) {
+                if (snapshot.hasData) {
+                  return Text(snapshot.data!['email']!);
+                } else {
+                  return Text('No data');
+                }
+              },
+            ),
+
+            // logout button
+            ElevatedButton(onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              );
+            }, child: Text('Logout'))
+          ],
+        ),
+        ),
     );
   }
+
+
 }

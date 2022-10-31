@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_publish/data/session/user_sessions.dart';
 import 'package:go_publish/pages/auth/signin.dart';
 import 'package:go_publish/pages/home.dart';
 import 'package:form_validator/form_validator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -21,9 +23,12 @@ class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 
-  void _validateAndSubmit() {
+  Future<void> _validateAndSubmit() async {
     if (_formKey.currentState!.validate()) {
-      //TODO CHECK LOGIN AND STATUS and save session
+
+      //insert the data into user session
+      UserSessions.saveSession(emailController.text, passwordController.text, "halo", "cuy");
+
       Navigator.pop(context);
       Navigator.push(
         context,
@@ -64,7 +69,6 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(
                       color: Color(0xff718096),
                       fontSize: 15,
-                      fontFamily: 'inter',
                       fontWeight: FontWeight.w500,
                     ),
                   )),
@@ -72,11 +76,11 @@ class _LoginPageState extends State<LoginPage> {
                 margin: const EdgeInsets.fromLTRB(10, 25, 10, 10),
                 child: TextFormField(
                   controller: emailController,
-                  validator: ValidationBuilder().required().build(),
+                  validator: ValidationBuilder().required().email().build(),
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffBAA394))),
-                    labelText: 'Username',
+                        borderSide: BorderSide(color: Color(0xff214782))),
+                    labelText: 'Email',
                   ),
                 ),
               ),
@@ -89,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                   ValidationBuilder().required().minLength(6).build(),
                   decoration: InputDecoration(
                     border: const UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffBAA394))),
+                        borderSide: BorderSide(color: Color(0xff214782))),
                     labelText: 'Password',
                     suffixIcon: IconButton(
                         onPressed: () {
@@ -109,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: const Color(0xffBAA394),
+                      primary: const Color(0xff214782),
                     ),
                     child: const Text('Login'),
                     onPressed: () {
@@ -125,15 +129,14 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(
                           color: Color(0xff718096),
                           fontSize: 15,
-                          fontFamily: 'inter',
                           fontWeight: FontWeight.w500)),
                   TextButton(
                     child: const Text(
                       'Register',
                       style: TextStyle(
                           fontSize: 15,
-                          color: Color(0xffFF6B42),
-                          fontFamily: 'inter'),
+                        color: Color(0xffF76D3A),
+                      ),
                     ),
                     onPressed: () {
                       //signup screen

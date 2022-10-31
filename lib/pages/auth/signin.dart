@@ -141,7 +141,7 @@ class _SigninState extends State<Signin> {
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: const Color(0xffBAA394),
+                      primary: const Color(0xff214782),
                     ),
                     child: const Text('Register'),
                     onPressed: () {
@@ -165,8 +165,8 @@ class _SigninState extends State<Signin> {
                       'Login',
                       style: TextStyle(
                           fontSize: 15,
-                          color: Color(0xffFF6B42),
-                          fontFamily: 'inter'),
+                          color: Color(0xffF76D3A),
+                      ),
                     ),
                     onPressed: () {
                       //login screen
