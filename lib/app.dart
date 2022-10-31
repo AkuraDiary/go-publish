@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_publish/data/session/user_sessions.dart';
 import 'package:go_publish/pages/auth/login.dart';
-
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'pages/home.dart';
 
 class MyApp extends StatelessWidget {
@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
       home: FutureBuilder<Map<String, String>?>(
         future: UserSessions.getSession(),
         builder: (BuildContext context, AsyncSnapshot<Map<String, String>?> snapshot) {
+          FlutterNativeSplash.remove();
           if (snapshot.hasData) {
             return Home();
           } else {
