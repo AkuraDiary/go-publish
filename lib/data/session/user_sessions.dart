@@ -8,12 +8,14 @@ class UserSessions {
   static const String _key = 'user_sessions';
   static const String _emailKey = 'email';
   static const String _passwordKey = 'password';
+  static const String _nameKey = 'name';
 
-  static Future<void> saveSession(String email, String password) async {
+  static Future<void> saveSession(String email, String password, String name) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final Map<String, String> session = <String, String>{
       _emailKey: email,
-      _passwordKey: password
+      _passwordKey: password,
+      _nameKey: name
     };
     prefs.setString(_key, json.encode(session));
   }
