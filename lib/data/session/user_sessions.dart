@@ -9,13 +9,16 @@ class UserSessions {
   static const String _emailKey = 'email';
   static const String _passwordKey = 'password';
   static const String _nameKey = 'name';
+  static const String _roleKey = 'role';
 
-  static Future<void> saveSession(String email, String password, String name) async {
+  static Future<void> saveSession(String email, String password, String name, String role) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final Map<String, String> session = <String, String>{
       _emailKey: email,
       _passwordKey: password,
-      _nameKey: name
+      _nameKey: name,
+      _roleKey: role
+
     };
     prefs.setString(_key, json.encode(session));
   }
