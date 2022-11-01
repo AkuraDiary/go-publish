@@ -12,6 +12,7 @@ class Signin extends StatefulWidget {
 
 class _SigninState extends State<Signin> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool is_mitra = false;
 
   void validateAndSave() {
     final FormState form = _formKey.currentState!;
@@ -28,6 +29,8 @@ class _SigninState extends State<Signin> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController nibController = TextEditingController();
+  TextEditingController bussinessNameController = TextEditingController();
 
   void _validateAndSubmit() {
     if (_formKey.currentState!.validate()) {
@@ -40,12 +43,12 @@ class _SigninState extends State<Signin> {
     }
   }
 
-
   @override
   void dispose() {
     nameController.dispose();
     passwordController.dispose();
     emailController.dispose();
+    nibController.dispose();
     super.dispose();
   }
 
@@ -63,28 +66,17 @@ class _SigninState extends State<Signin> {
           child: ListView(
             children: <Widget>[
               Container(
-                  alignment: Alignment.topLeft,
-                  margin: const EdgeInsets.fromLTRB(10, 5, 10, 10),
-                  child: const Text(
-                    'Create Account',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'abril',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 30),
-                  )),
-              Container(
-                  alignment: Alignment.topLeft,
-                  margin: const EdgeInsets.fromLTRB(10, 5, 10, 10),
-                  child: const Text(
-                    'Color your days and make your story',
-                    style: TextStyle(
-                      color: Color(0xff718096),
-                      fontSize: 15,
-                      fontFamily: 'inter',
+                alignment: Alignment.topLeft,
+                margin: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+                child: const Text(
+                  'Create Account',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'abril',
                       fontWeight: FontWeight.w500,
-                    ),
-                  )),
+                      fontSize: 30),
+                ),
+              ),
               Container(
                 margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: TextFormField(
@@ -135,6 +127,56 @@ class _SigninState extends State<Signin> {
                   ),
                 ),
               ),
+              CheckboxListTile(
+                title: const Text(
+                  'Saya Seorang Mitra UMKM',
+                  style: TextStyle(
+                    color: Color(0xff718096),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                value: is_mitra,
+                onChanged: (bool? value) {
+                  setState(
+                    () {
+                      is_mitra = value!;
+                    },
+                  );
+                },
+                controlAffinity: ListTileControlAffinity.leading,
+              ),
+              is_mitra
+                  ? Container(
+                      margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      child: TextFormField(
+                        controller: nibController,
+                        validator: ValidationBuilder().required().build(),
+                        decoration: const InputDecoration(
+                          border: UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Color(0xffBAA394))),
+                          labelText: 'Nomor Induk Berusaha',
+                        ),
+                      ),
+                    )
+                  : Container(),
+              is_mitra ? Container(
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: TextFormField(
+                  enabled: is_mitra,
+                  controller: nibController,
+                  validator: ValidationBuilder().required().build(),
+                  decoration: const InputDecoration(
+                    border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffBAA394))),
+                    labelText: 'NIB anda',
+                  ),
+                ),
+              )
+                  : Container(),
+
+
               Container(
                   height: 50,
                   margin: const EdgeInsets.fromLTRB(0, 15, 0, 10),
@@ -164,8 +206,8 @@ class _SigninState extends State<Signin> {
                     child: const Text(
                       'Login',
                       style: TextStyle(
-                          fontSize: 15,
-                          color: Color(0xffF76D3A),
+                        fontSize: 15,
+                        color: Color(0xffF76D3A),
                       ),
                     ),
                     onPressed: () {

@@ -8,13 +8,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
-
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   // Initially password is obscure
   bool _obscureText = true;
   TextEditingController emailController = TextEditingController();
@@ -22,12 +20,11 @@ class _LoginPageState extends State<LoginPage> {
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-
   Future<void> _validateAndSubmit() async {
     if (_formKey.currentState!.validate()) {
-
       //insert the data into user session
-      UserSessions.saveSession(emailController.text, passwordController.text, "halo", "cuy");
+      UserSessions.saveSession(
+          emailController.text, passwordController.text, "halo", "cuy");
 
       Navigator.pop(context);
       Navigator.push(
@@ -62,17 +59,6 @@ class _LoginPageState extends State<LoginPage> {
                         fontSize: 30),
                   )),
               Container(
-                  alignment: Alignment.topLeft,
-                  margin: const EdgeInsets.fromLTRB(10, 5, 10, 10),
-                  child: const Text(
-                    'Color your days and make your story',
-                    style: TextStyle(
-                      color: Color(0xff718096),
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  )),
-              Container(
                 margin: const EdgeInsets.fromLTRB(10, 25, 10, 10),
                 child: TextFormField(
                   controller: emailController,
@@ -90,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                   obscureText: _obscureText,
                   controller: passwordController,
                   validator:
-                  ValidationBuilder().required().minLength(6).build(),
+                      ValidationBuilder().required().minLength(6).build(),
                   decoration: InputDecoration(
                     border: const UnderlineInputBorder(
                         borderSide: BorderSide(color: Color(0xff214782))),
@@ -134,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: const Text(
                       'Register',
                       style: TextStyle(
-                          fontSize: 15,
+                        fontSize: 15,
                         color: Color(0xffF76D3A),
                       ),
                     ),
@@ -155,5 +141,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-  
 }

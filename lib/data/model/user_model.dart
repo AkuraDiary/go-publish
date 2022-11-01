@@ -3,6 +3,8 @@ class user{
   String? email;
   String? password;
   String? role;
+  String? nib;
+  String? nama_usaha;
 
   user({required this.name, required this.email, required this.password, required this.role});
 
