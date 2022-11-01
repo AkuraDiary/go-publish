@@ -23,8 +23,8 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _validateAndSubmit() async {
     if (_formKey.currentState!.validate()) {
       //insert the data into user session
-      UserSessions.saveSession(
-          emailController.text, passwordController.text, "halo", "cuy");
+      debugPrint('Form is valid');
+      UserSessions.saveSession(emailController.text, passwordController.text, "halo", "cuy");
 
       Navigator.pop(context);
       Navigator.push(
@@ -102,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                       primary: const Color(0xff214782),
                     ),
                     child: const Text('Login'),
-                    onPressed: () {
+                    onPressed: () async {
                       _validateAndSubmit();
                       debugPrint("name : ${emailController.text}");
                       debugPrint("pass : ${passwordController.text}");

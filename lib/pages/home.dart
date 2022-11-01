@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Home extends StatelessWidget {
   Home({super.key});
 
-  Future<Map<String, String>?> session = UserSessions.getSession();
+  Future<Map<String, dynamic>?> session = UserSessions.getSession();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,9 +18,9 @@ class Home extends StatelessWidget {
           children: [
             Text('Home'),
             // get saved user login email
-            FutureBuilder<Map<String, String>?>(
+            FutureBuilder<Map<String, dynamic>?>(
               future: session,
-              builder: (BuildContext context, AsyncSnapshot<Map<String, String>?> snapshot) {
+              builder: (BuildContext context, AsyncSnapshot<Map<String, dynamic>?> snapshot) {
                 if (snapshot.hasData) {
                   return Text(snapshot.data!['email']!);
                 } else {

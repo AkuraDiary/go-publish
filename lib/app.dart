@@ -20,9 +20,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: FutureBuilder<Map<String, String>?>(
+      home: FutureBuilder<Map<String, dynamic>?>(
         future: UserSessions.getSession(),
-        builder: (BuildContext context, AsyncSnapshot<Map<String, String>?> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<Map<String, dynamic>?> snapshot) {
           FlutterNativeSplash.remove();
           if (snapshot.hasData) {
             return Home();
